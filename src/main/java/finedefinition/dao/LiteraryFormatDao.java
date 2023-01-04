@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface LiteraryFormatDao {
     List<LiteraryFormat> getAll();
+
+    LiteraryFormat create(LiteraryFormat format);
 }
