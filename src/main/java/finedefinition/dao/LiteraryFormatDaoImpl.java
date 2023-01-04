@@ -2,7 +2,6 @@ package finedefinition.dao;
 
 import finedefinition.models.LiteraryFormat;
 import finedefinition.util.ConnectionUtil;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +15,9 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         List<LiteraryFormat> allFormats = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();
-             Statement getAllFormatsStatement = connection.createStatement()) {
-            ResultSet resultSet = getAllFormatsStatement.executeQuery("SELECT * FROM literary_formats;");
+                Statement getAllFormatsStatement = connection.createStatement()) {
+            ResultSet resultSet = getAllFormatsStatement
+                    .executeQuery("SELECT * FROM literary_formats;");
             while (resultSet.next()) {
                 String format = resultSet.getString("format");
                 Long id = resultSet.getObject("id", Long.class);

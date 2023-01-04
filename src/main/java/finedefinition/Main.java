@@ -3,7 +3,6 @@ package finedefinition;
 import finedefinition.dao.LiteraryFormatDao;
 import finedefinition.dao.LiteraryFormatDaoImpl;
 import finedefinition.models.LiteraryFormat;
-
 import java.util.List;
 
 public class Main {

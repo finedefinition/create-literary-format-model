@@ -13,15 +13,17 @@ public class ConnectionUtil {
             throw new RuntimeException("Can`t load JDBC driver for MySQL", e);
         }
     }
-        public static Connection getConnection () {
-            try {
-                Properties dbProperties = new Properties();
-                dbProperties.put("user", "root");
-                dbProperties.put("password", "3094410014");
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/library_db", dbProperties);
 
-            } catch (SQLException throwable) {
-                throw new RuntimeException("Can`t create connection to DB", throwable);
-            }
+    public static Connection getConnection() {
+        try {
+            Properties dbProperties = new Properties();
+            dbProperties.put("user", "root");
+            dbProperties.put("password", "3094410014");
+            return DriverManager
+                    .getConnection("jdbc:mysql://localhost:3306/library_db", dbProperties);
+
+        } catch (SQLException throwable) {
+            throw new RuntimeException("Can`t create connection to DB", throwable);
         }
     }
+}
