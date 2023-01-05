@@ -7,4 +7,6 @@ public interface LiteraryFormatDao {
     List<LiteraryFormat> getAll();
 
     LiteraryFormat create(LiteraryFormat format);
+
+    boolean delete(Long id);
 }

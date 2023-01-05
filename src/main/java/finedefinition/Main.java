@@ -9,8 +9,9 @@ public class Main {
         LiteraryFormat format = new LiteraryFormat();
         format.setTitle("Sci-Fi");
         LiteraryFormatDao literaryFormatDao = new LiteraryFormatDaoImpl();
-        LiteraryFormat savedFormat = literaryFormatDao.create(format);
-        System.out.println(savedFormat);
+        //  LiteraryFormat savedFormat = literaryFormatDao.create(format);
+        //  System.out.println(savedFormat);
+        literaryFormatDao.delete(15L);
         literaryFormatDao.getAll().forEach(System.out::println);
     }
 }
