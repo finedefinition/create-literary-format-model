@@ -7,9 +7,10 @@ import finedefinition.models.LiteraryFormat;
 public class Main {
     public static void main(String[] args) {
         LiteraryFormat format = new LiteraryFormat();
-        format.setTitle("Proza");
+        format.setTitle("Sci-Fi");
         LiteraryFormatDao literaryFormatDao = new LiteraryFormatDaoImpl();
-        literaryFormatDao.create(format);
+        LiteraryFormat savedFormat = literaryFormatDao.create(format);
+        System.out.println(savedFormat);
         literaryFormatDao.getAll().forEach(System.out::println);
     }
 }

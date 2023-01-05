@@ -3,6 +3,7 @@ package finedefinition.dao;
 import finedefinition.models.LiteraryFormat;
 import finedefinition.util.ConnectionUtil;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,14 +35,21 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
 
     @Override
     public LiteraryFormat create(LiteraryFormat format) {
+        String insertFormatRequest = "INSERT INTO literary_formats(format) values(?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement createFormatsStatement = connection.createStatement()) {
-            String insertFormatRequest = "INSERT INTO literary_formats(format) values('"
-                       + format.getTitle() + "')";
-            createFormatsStatement.executeUpdate(insertFormatRequest);
+                PreparedStatement createFormatsStatement = connection
+                        .prepareStatement(insertFormatRequest, Statement
+                                .RETURN_GENERATED_KEYS)) {
+            createFormatsStatement.setString(1, format.getTitle());
+            createFormatsStatement.executeUpdate();
+            ResultSet generatedKeys = createFormatsStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                Long id = generatedKeys.getObject(1, Long.class);
+                format.setId(id);
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Can`t insert format to DB", e);
         }
-        return null;
+        return format;
     }
 }
