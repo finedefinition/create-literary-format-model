@@ -1,6 +1,7 @@
 package finedefinition.dao;
 
 import finedefinition.DataProcessingException;
+import finedefinition.lib.Dao;
 import finedefinition.models.LiteraryFormat;
 import finedefinition.util.ConnectionUtil;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Dao
 public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     @Override
     public List<LiteraryFormat> getAll() {

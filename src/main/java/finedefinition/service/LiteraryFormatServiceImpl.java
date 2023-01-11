@@ -1,17 +1,18 @@
 package finedefinition.service;
 
 import finedefinition.dao.LiteraryFormatDao;
+import finedefinition.lib.Inject;
+import finedefinition.lib.Service;
 import finedefinition.models.LiteraryFormat;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class LiteraryFormatServiceImpl implements LiteraryFormatService {
+    @Inject
     private LiteraryFormatDao literaryFormatDao;
 
-    public LiteraryFormatServiceImpl(LiteraryFormatDao literaryFormatDao) {
-        this.literaryFormatDao = literaryFormatDao;
-    }
     @Override
     public List<LiteraryFormat> getAll() {
         return literaryFormatDao.getAll();
