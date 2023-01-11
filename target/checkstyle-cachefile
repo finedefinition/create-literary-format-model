@@ -1,7 +1,14 @@
-#Wed Jan 04 22:42:19 GMT 2023
-/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/Main.java=1672872097719
-/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDao.java=1672872097725
-/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDaoImpl.java=1672872133996
+#Wed Jan 11 23:49:59 GMT 2023
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/DataProcessingException.java=1673478095072
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/Main.java=1673480974870
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDao.java=1673480840122
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDaoImpl.java=1673480974877
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Dao.java=1673479434064
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Inject.java=1673479248569
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Service.java=1673479949476
 /Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/LiteraryFormat.java=1672872133991
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatService.java=1673478095083
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatServiceImpl.java=1673480993101
 /Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/ConnectionUtil.java=1672871929162
+/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/Injector.java=1673480840132
 configuration*?=C691ABE9B06D7BE3DE6C0FFB48698F9C1736EB28

@@ -2,12 +2,26 @@
 <checkstyle version="8.29">
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/ConnectionUtil.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/Injector.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDaoImpl.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDao.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/LiteraryFormat.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/DataProcessingException.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/Main.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Inject.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Service.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Dao.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatService.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatServiceImpl.java">
 </file>
 </checkstyle>

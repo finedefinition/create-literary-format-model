@@ -1,17 +1,17 @@
-package finedefinition.dao;
+package finedefinition.service;
 
 import finedefinition.models.LiteraryFormat;
 import java.util.List;
 import java.util.Optional;
 
-public interface LiteraryFormatDao {
+public interface LiteraryFormatService {
     List<LiteraryFormat> getAll();
 
     LiteraryFormat create(LiteraryFormat format);
 
-    boolean delete(Long id);
-
     Optional<LiteraryFormat> get(Long id);
 
     LiteraryFormat update(LiteraryFormat format);
+
+    boolean delete(Long id);
 }
