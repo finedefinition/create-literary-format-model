@@ -1,5 +1,6 @@
 finedefinition/util/ConnectionUtil.class
 finedefinition/Main.class
+finedefinition/service/LiteraryFormatService.class
 finedefinition/dao/LiteraryFormatDao.class
 finedefinition/dao/LiteraryFormatDaoImpl.class
 finedefinition/models/LiteraryFormat.class
