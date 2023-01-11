@@ -1,6 +1,12 @@
 finedefinition/util/ConnectionUtil.class
-finedefinition/Main.class
 finedefinition/service/LiteraryFormatService.class
 finedefinition/dao/LiteraryFormatDao.class
+finedefinition/lib/Inject.class
+finedefinition/util/Injector.class
 finedefinition/dao/LiteraryFormatDaoImpl.class
 finedefinition/models/LiteraryFormat.class
+finedefinition/DataProcessingException.class
+finedefinition/service/LiteraryFormatServiceImpl.class
+finedefinition/lib/Dao.class
+finedefinition/Main.class
+finedefinition/lib/Service.class

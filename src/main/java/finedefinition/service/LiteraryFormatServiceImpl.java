@@ -4,7 +4,6 @@ import finedefinition.dao.LiteraryFormatDao;
 import finedefinition.lib.Inject;
 import finedefinition.lib.Service;
 import finedefinition.models.LiteraryFormat;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ public class LiteraryFormatServiceImpl implements LiteraryFormatService {
     }
 
     @Override
-    public Optional<LiteraryFormat>  get(Long id) {
+    public Optional<LiteraryFormat> get(Long id) {
         return literaryFormatDao.get(id);
     }
 

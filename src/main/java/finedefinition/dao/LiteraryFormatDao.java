@@ -10,6 +10,8 @@ public interface LiteraryFormatDao {
     LiteraryFormat create(LiteraryFormat format);
 
     boolean delete(Long id);
+
     Optional<LiteraryFormat> get(Long id);
+
     LiteraryFormat update(LiteraryFormat format);
 }

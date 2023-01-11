@@ -76,7 +76,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     public Optional<LiteraryFormat> get(Long id) {
         String selectQuery = "SELECT * FROM literary_formats WHERE id = ? AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+                PreparedStatement statement = connection.prepareStatement(selectQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -94,8 +94,8 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         String query = "UPDATE literary_formats SET format = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             statement.setString(1, format.getTitle());
             statement.setLong(2, format.getId());
             statement.executeUpdate();
