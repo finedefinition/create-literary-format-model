@@ -4,15 +4,44 @@
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/Injector.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/BookDaoImpl.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/AuthorDao.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/AuthorDaoImpl.java">
+<error line="23" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="24" severity="error" message="&apos;Statement&apos; has incorrect indentation level 21, expected level should be 24." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="45" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="63" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="80" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="81" severity="error" message="&apos;=&apos; has incorrect indentation level 21, expected level should be 24." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="97" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDaoImpl.java">
+<error line="22" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="23" severity="error" message="&apos;=&apos; has incorrect indentation level 21, expected level should be 24." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="60" severity="error" message="&apos;try resource&apos; has incorrect indentation level 13, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="61" severity="error" message="&apos;=&apos; has incorrect indentation level 21, expected level should be 24." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/BookDao.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDao.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/Author.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/Book.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/LiteraryFormat.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/DataProcessingException.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/Main.java">
+<error line="3" column="8" severity="error" message="Unused import - finedefinition.dao.AuthorDao." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="4" column="8" severity="error" message="Unused import - finedefinition.dao.AuthorDaoImpl." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="5" column="8" severity="error" message="Unused import - finedefinition.models.Author." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="6" column="8" severity="error" message="Unused import - finedefinition.models.Book." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="7" column="8" severity="error" message="Unused import - finedefinition.service.BookService." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="8" column="8" severity="error" message="Unused import - finedefinition.service.LiteraryFormatService." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Inject.java">
 </file>
@@ -20,8 +49,16 @@
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Dao.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/BookServiceImpl.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatService.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/AuthorServiceImpl.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatServiceImpl.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/AuthorService.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/BookService.java">
 </file>
 </checkstyle>
