@@ -5,7 +5,7 @@ import finedefinition.lib.Inject;
 import finedefinition.lib.Service;
 import finedefinition.models.LiteraryFormat;
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class LiteraryFormatServiceImpl implements LiteraryFormatService {
@@ -23,8 +23,10 @@ public class LiteraryFormatServiceImpl implements LiteraryFormatService {
     }
 
     @Override
-    public Optional<LiteraryFormat> get(Long id) {
-        return literaryFormatDao.get(id);
+    public LiteraryFormat get(Long id) {
+        return literaryFormatDao.get(id)
+                .orElseThrow(() -> new NoSuchElementException("Could not get LiteraryFormat "
+                + "by id = " + id));
     }
 
     @Override

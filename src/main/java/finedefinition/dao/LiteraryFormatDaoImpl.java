@@ -17,24 +17,20 @@ import java.util.Optional;
 public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     @Override
     public List<LiteraryFormat> getAll() {
-        List<LiteraryFormat> allFormats = new ArrayList<>();
-
+        String query = "SELECT * FROM literary_formats WHERE is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement getAllFormatsStatement = connection.createStatement()) {
-            ResultSet resultSet = getAllFormatsStatement
-                       .executeQuery("SELECT * FROM literary_formats WHERE is_deleted = false;");
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
+            List<LiteraryFormat> literaryFormats = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String format = resultSet.getString("format");
-                Long id = resultSet.getObject("id", Long.class);
-                LiteraryFormat literaryFormat = new LiteraryFormat();
-                literaryFormat.setId(id);
-                literaryFormat.setTitle(format);
-                allFormats.add(literaryFormat);
+                literaryFormats.add(getLiteratureFormat(resultSet));
             }
+            return literaryFormats;
         } catch (SQLException e) {
-            throw new RuntimeException("Can`t get all formats from DB", e);
+            throw new RuntimeException("Couldn't get a list of literaryFormats "
+                    + "from literaryFormats table. ", e);
         }
-        return allFormats;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
                 PreparedStatement createFormatsStatement = connection
                         .prepareStatement(insertFormatRequest, Statement
                                 .RETURN_GENERATED_KEYS)) {
-            createFormatsStatement.setString(1, format.getTitle());
+            createFormatsStatement.setString(1, format.getFormat());
             createFormatsStatement.executeUpdate();
             ResultSet generatedKeys = createFormatsStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -52,7 +48,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
                 format.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Can`t insert format to DB", e);
+            throw new DataProcessingException("Couldn't create format. " + format, e);
         }
         return format;
     }
@@ -61,11 +57,10 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     public boolean delete(Long id) {
         String deleteRequest = "UPDATE literary_formats SET is_deleted = true where id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement createFormatsStatement = connection
-                        .prepareStatement(deleteRequest, Statement
-                             .RETURN_GENERATED_KEYS)) {
-            createFormatsStatement.setLong(1, id);
-            return createFormatsStatement.executeUpdate() >= 1;
+                PreparedStatement statement
+                         = connection.prepareStatement(deleteRequest)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             throw new RuntimeException("Can`t insert format to DB", e);
@@ -79,14 +74,15 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
                 PreparedStatement statement = connection.prepareStatement(selectQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
+            LiteraryFormat literaryFormat = null;
             if (resultSet.next()) {
-                return Optional.of(getLiteratureFormat(resultSet));
+                literaryFormat = getLiteratureFormat(resultSet);
             }
+            return Optional.ofNullable(literaryFormat);
         } catch (SQLException e) {
             throw new DataProcessingException(
                     String.format("Can't get manufacturer with id = %d from database", id), e);
         }
-        return Optional.empty();
     }
 
     @Override
@@ -96,7 +92,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
-            statement.setString(1, format.getTitle());
+            statement.setString(1, format.getFormat());
             statement.setLong(2, format.getId());
             statement.executeUpdate();
             return format;
@@ -110,7 +106,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         try {
             LiteraryFormat literaryFormat = new LiteraryFormat();
             literaryFormat.setId(resultSet.getObject("id", Long.class));
-            literaryFormat.setTitle(resultSet.getString("format"));
+            literaryFormat.setFormat(resultSet.getString("format"));
             return literaryFormat;
         } catch (SQLException e) {
             throw new RuntimeException("Can`t insert format to DB", e);

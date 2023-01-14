@@ -4,9 +4,21 @@
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/util/Injector.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/BookDaoImpl.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/AuthorDao.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/AuthorDaoImpl.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDaoImpl.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/BookDao.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/dao/LiteraryFormatDao.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/Author.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/Book.java">
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/models/LiteraryFormat.java">
 </file>
@@ -20,8 +32,16 @@
 </file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/lib/Dao.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/BookServiceImpl.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatService.java">
 </file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/AuthorServiceImpl.java">
+</file>
 <file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/LiteraryFormatServiceImpl.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/AuthorService.java">
+</file>
+<file name="/Users/sergii/IdeaProjects/create-literary-format-model/src/main/java/finedefinition/service/BookService.java">
 </file>
 </checkstyle>

@@ -4,6 +4,7 @@ import finedefinition.models.LiteraryFormat;
 import java.util.List;
 import java.util.Optional;
 
+//Manufacturer
 public interface LiteraryFormatDao {
     List<LiteraryFormat> getAll();
 
