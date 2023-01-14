@@ -26,16 +26,16 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> getAll() {
-        return null;
+        return authorDao.getAll();
     }
 
     @Override
     public Author update(Author author) {
-        return null;
+        return authorDao.update(author);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return authorDao.delete(id);
     }
 }

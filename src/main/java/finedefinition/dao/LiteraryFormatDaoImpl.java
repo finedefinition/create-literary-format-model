@@ -19,8 +19,8 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     public List<LiteraryFormat> getAll() {
         String query = "SELECT * FROM literary_formats WHERE is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             List<LiteraryFormat> literaryFormats = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -40,7 +40,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
                 PreparedStatement createFormatsStatement = connection
                         .prepareStatement(insertFormatRequest, Statement
                                 .RETURN_GENERATED_KEYS)) {
-            createFormatsStatement.setString(1, format.getTitle());
+            createFormatsStatement.setString(1, format.getFormat());
             createFormatsStatement.executeUpdate();
             ResultSet generatedKeys = createFormatsStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -57,8 +57,8 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
     public boolean delete(Long id) {
         String deleteRequest = "UPDATE literary_formats SET is_deleted = true where id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(deleteRequest)) {
+                PreparedStatement statement
+                         = connection.prepareStatement(deleteRequest)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
 
@@ -92,7 +92,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
-            statement.setString(1, format.getTitle());
+            statement.setString(1, format.getFormat());
             statement.setLong(2, format.getId());
             statement.executeUpdate();
             return format;
@@ -106,7 +106,7 @@ public class LiteraryFormatDaoImpl implements LiteraryFormatDao {
         try {
             LiteraryFormat literaryFormat = new LiteraryFormat();
             literaryFormat.setId(resultSet.getObject("id", Long.class));
-            literaryFormat.setTitle(resultSet.getString("format"));
+            literaryFormat.setFormat(resultSet.getString("format"));
             return literaryFormat;
         } catch (SQLException e) {
             throw new RuntimeException("Can`t insert format to DB", e);

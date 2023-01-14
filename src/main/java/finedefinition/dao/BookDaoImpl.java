@@ -45,13 +45,12 @@ public class BookDaoImpl implements BookDao {
         String insertAuthorsQuery = "INSERT INTO books_authors "
                 + "(book_id, author_id) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement addAuthorToBooksStatement = connection
+                PreparedStatement statement = connection
                         .prepareStatement(insertAuthorsQuery)) {
-            addAuthorToBooksStatement.setLong(1, book.getId());
-            addAuthorToBooksStatement.executeUpdate();
+            statement.setLong(1, book.getId());
             for (Author author : book.getAuthors()) {
-                addAuthorToBooksStatement.setLong(2, author.getId());
-                addAuthorToBooksStatement.executeUpdate();
+                statement.setLong(2, author.getId());
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException("Can`t insert authors to book: " + book, e);
@@ -126,7 +125,7 @@ public class BookDaoImpl implements BookDao {
         LiteraryFormat literaryFormat = new LiteraryFormat();
         literaryFormat.setId(resultSet
                 .getObject("literary_format_id", Long.class));
-        literaryFormat.setTitle(resultSet.getString("format"));
+        literaryFormat.setFormat(resultSet.getString("format"));
         book.setFormat(literaryFormat);
         book.setId(resultSet.getObject("book_id", Long.class));
         return book;

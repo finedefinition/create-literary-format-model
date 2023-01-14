@@ -10,6 +10,18 @@ public class Book {
     private LiteraryFormat format;
     private List<Author> authors;
 
+    public Book() {
+    }
+
+    public Book(Long id, String title, BigDecimal price,
+                LiteraryFormat format, List<Author> authors) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.format = format;
+        this.authors = authors;
+    }
+
     public List<Author> getAuthors() {
         return authors;
     }

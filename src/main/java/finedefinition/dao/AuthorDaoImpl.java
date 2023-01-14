@@ -13,15 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//Driver
 @Dao
 public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Author create(Author author) {
         String query = "INSERT INTO authors (name, lastname) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query,
-                     Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement = connection.prepareStatement(query,
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, author.getName());
             statement.setString(2, author.getLastname());
             statement.executeUpdate();
@@ -42,7 +41,7 @@ public class AuthorDaoImpl implements AuthorDao {
                 + "FROM authors "
                 + "WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Author author = null;
@@ -60,7 +59,7 @@ public class AuthorDaoImpl implements AuthorDao {
         String query = "SELECT * FROM authors WHERE is_deleted = FALSE";
         List<Author> authors = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 authors.add(getAuthor(resultSet));
@@ -77,8 +76,8 @@ public class AuthorDaoImpl implements AuthorDao {
                 + "SET name = ?, lastname = ? "
                 + "WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             statement.setString(1, author.getName());
             statement.setString(2, author.getLastname());
             statement.setLong(3, author.getId());
@@ -94,7 +93,7 @@ public class AuthorDaoImpl implements AuthorDao {
     public boolean delete(Long id) {
         String query = "UPDATE authors SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -108,5 +107,4 @@ public class AuthorDaoImpl implements AuthorDao {
         String lastname = resultSet.getString("lastname");
         return new Author(id, name, lastname);
     }
-
 }

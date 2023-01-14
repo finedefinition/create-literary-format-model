@@ -2,7 +2,15 @@ package finedefinition.models;
 
 public class LiteraryFormat {
     private Long id;
-    private String title;
+    private String format;
+
+    public LiteraryFormat() {
+    }
+
+    public LiteraryFormat(Long id, String format) {
+        this.id = id;
+        this.format = format;
+    }
 
     public Long getId() {
         return id;
@@ -12,17 +20,17 @@ public class LiteraryFormat {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFormat() {
+        return format;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFormat(String format) {
+        this.format = format;
     }
 
     @Override
     public String toString() {
         return "LiteraryFormat{"
-                + "id=" + id + ", title='" + title + '\'' + '}';
+                + "id=" + id + ", format='" + format + '\'' + '}';
     }
 }
