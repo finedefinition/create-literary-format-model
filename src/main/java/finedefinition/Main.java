@@ -35,7 +35,7 @@ public class Main {
         authorService.create(author3);
         authorService.create(author4);
         authorService.create(author5);
-        Book book1 = new Book(null, "Sherlock Holmes",
+        Book book1 = new Book(null, "Sherlock Holmes 2",
                 new BigDecimal(100),literaryFormat1, List.of(author1));
         Book book2 = new Book(null, "1984",
                 new BigDecimal(120),literaryFormat2, List.of(author2));
@@ -43,13 +43,18 @@ public class Main {
                 new BigDecimal(90),literaryFormat3, List.of(author3));
         Book book4 = new Book(null, "Star Trek",
                 new BigDecimal(130),literaryFormat3, List.of(author4, author5));
+
         BookService bookService
                 = (BookService) injector.getInstance(BookService.class);
         bookService.create(book1);
         bookService.create(book2);
         bookService.create(book3);
         bookService.create(book4);
-
+        System.out.println(bookService.getAll());
+        bookService.addAuthorToBook(author1, book4);
+        System.out.println(bookService.getAll());
+        bookService.removeAuthorFromBook(author1,book4);
+        System.out.println(bookService.getAll());
     }
 }
 

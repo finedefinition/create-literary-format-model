@@ -5,6 +5,7 @@ import finedefinition.lib.Inject;
 import finedefinition.lib.Service;
 import finedefinition.models.Author;
 import finedefinition.models.Book;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -42,16 +43,21 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addAuthorToBook(Author author, Book book) {
-
+        List<Author> list = book.getAuthors();
+        List<Author> authors = new ArrayList<>(list);
+        authors.add(author);
+        book.setAuthors(authors);
+        bookDao.update(book);
     }
 
     @Override
     public void removeAuthorFromBook(Author author, Book book) {
-
+        book.getAuthors().remove(author);
+        bookDao.update(book);
     }
 
     @Override
     public List<Book> getAllByAuthor(Long authorId) {
-        return null;
+        return bookDao.getAllByAuthor(authorId);
     }
 }
