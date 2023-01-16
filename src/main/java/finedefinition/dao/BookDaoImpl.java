@@ -58,8 +58,85 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    public Optional<Book> get(Long id) {
+        String selectRequest = "SELECT b.id AS book_id, title, price,"
+                + " lf.id AS literary_format_id, lf.format\n"
+                + "FROM library_db.books b\n" + "JOIN literary_formats lf\n"
+                + "ON b.literary_format_id = lf.id\n"
+                + "WHERE b.id = ? AND b.is_deleted = false;";
+        Book book = null;
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement getBookStatement = connection
+                        .prepareStatement(selectRequest)) {
+            getBookStatement.setLong(1, id);
+            ResultSet resultSet = getBookStatement.executeQuery();
+            if (resultSet.next()) {
+                book = parsedBookWithLiteraryFormat(resultSet);
+            }
+
+        } catch (SQLException e) {
+            throw new DataProcessingException(String
+                    .format("Can't find book with id = %d from database", id), e);
+        }
+        if (book != null) {
+            book.setAuthors(getAuthors(book));
+        }
+        return Optional.ofNullable(book);
+    }
+
+    private Book parsedBookWithLiteraryFormat(ResultSet resultSet)
+            throws SQLException {
+        Book book = new Book();
+        book.setTitle(resultSet.getString("title"));
+        book.setPrice(resultSet.getBigDecimal("price"));
+        LiteraryFormat literaryFormat = new LiteraryFormat();
+        literaryFormat.setId(resultSet
+                .getObject("literary_format_id", Long.class));
+        literaryFormat.setFormat(resultSet.getString("format"));
+        book.setFormat(literaryFormat);
+        book.setId(resultSet.getObject("id", Long.class));
+        return book;
+    }
+
+    private List<Author> getAuthors(Book book) {
+        String query = "SELECT * FROM authors INNER JOIN books_authors "
+                + "ON books_authors.author_id = authors.id "
+                + "WHERE books_authors.book_id = ?;";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement(query)) {
+            statement.setLong(1, book.getId());
+            ResultSet resultSet = statement.executeQuery();
+            List<Author> authors = new ArrayList<>();
+            while (resultSet.next()) {
+                Author author = parsedAuthorsFromResultSet(resultSet);
+                authors.add(author);
+            }
+            return authors;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get authors from book " + book, e);
+        }
+    }
+
+    @Override
     public List<Book> getAll() {
-        return null;
+        String query = "SELECT * FROM books INNER JOIN literary_formats "
+                + "ON books.literary_format_id = literary_formats.id "
+                + "WHERE books.is_deleted = FALSE";
+        List<Book> books = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                books.add(parsedBookWithLiteraryFormat(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get all books form DB", e);
+        }
+        for (Book book : books) {
+            book.setAuthors(getAuthors(book));
+        }
+        return books;
     }
 
     @Override
@@ -77,77 +154,57 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Optional<Book> get(Long id) {
-        String selectRequest = "SELECT b.id AS book_id, title, price,"
-                + " lf.id AS literary_format_id, lf.format\n"
-                + "FROM library_db.books b\n" + "JOIN literary_formats lf\n"
-                + "ON b.literary_format_id = lf.id\n"
-                + "WHERE b.id = ? AND b.is_deleted = false;";
-        Book book = null;
+    public Book update(Book book) {
+        String query = "UPDATE books SET title = ?, price = ?, literary_format_id = ? "
+                + "WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getBookStatement = connection
-                        .prepareStatement(selectRequest)) {
-            getBookStatement.setLong(1, id);
-            ResultSet resultSet = getBookStatement.executeQuery();
-            if (resultSet.next()) {
-                book = parsedBookWithLiteraryFormatFromResultSet(resultSet);
-            }
-
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, book.getTitle());
+            statement.setBigDecimal(2, book.getPrice());
+            statement.setLong(3, book.getFormat().getId());
+            statement.setLong(4, book.getId());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DataProcessingException(String
-                    .format("Can't find book with id = %d from database", id), e);
+            throw new DataProcessingException("Can't update a car " + book, e);
         }
-        if (book != null) {
-            book.setAuthors(getAuthorsForBook(id));
-        }
-        return Optional.ofNullable(book);
+        deleteAuthorsFromBook(book);
+        insertAuthors(book);
+        return book;
     }
 
-    @Override
-    public Book update(Book book) {
-        //TODO 1. update books fields
-        // 2. delete all relations in books_authors table
-        // where bookId = book.getId() IN CASE OF DELETE AUTHOR
-        // 3.add new relations to the books_authors table
-        return book;
+    private void deleteAuthorsFromBook(Book book) {
+        String query = "DELETE FROM books_authors WHERE book_id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, book.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't delete authors from book  " + book, e);
+        }
     }
 
     @Override
     public List<Book> getAllByAuthor(Long authorId) {
-        return null;
-    }
-
-    private Book parsedBookWithLiteraryFormatFromResultSet(ResultSet resultSet)
-            throws SQLException {
-        Book book = new Book();
-        book.setTitle(resultSet.getString("title"));
-        book.setPrice(resultSet.getBigDecimal("price"));
-        LiteraryFormat literaryFormat = new LiteraryFormat();
-        literaryFormat.setId(resultSet
-                .getObject("literary_format_id", Long.class));
-        literaryFormat.setFormat(resultSet.getString("format"));
-        book.setFormat(literaryFormat);
-        book.setId(resultSet.getObject("book_id", Long.class));
-        return book;
-    }
-
-    private List<Author> getAuthorsForBook(Long bookId) {
-        String getAllAuthorsForBookRequest = "SELECT id, name, lastname FROM authors a JOIN "
-                + "books_authors ba ON a.id = ba.author_id WHERE ba.book_id = ?;";
+        String query = "SELECT * FROM books INNER JOIN literary_formats "
+                + "ON books.literary_format_id = literary_formats.id "
+                + "INNER JOIN books_authors "
+                + "ON books.id = books_authors.book_id "
+                + "WHERE books_authors.author_id = ?;";
+        List<Book> books = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getAllAuthorsStatement = connection
-                        .prepareStatement(getAllAuthorsForBookRequest)) {
-            getAllAuthorsStatement.setLong(1, bookId);
-            ResultSet resultSet = getAllAuthorsStatement.executeQuery();
-            List<Author> authors = new ArrayList<>();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, authorId);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                authors.add(parsedAuthorsFromResultSet(resultSet));
+                books.add(parsedBookWithLiteraryFormat(resultSet));
             }
-            return authors;
         } catch (SQLException e) {
-            throw new DataProcessingException(String
-                    .format("Can't find book with id = %d from database", bookId), e);
+            throw new DataProcessingException("Can't get books by author id " + authorId, e);
         }
+        for (Book book : books) {
+            book.setAuthors(getAuthors(book));
+        }
+        return books;
     }
 
     private Author parsedAuthorsFromResultSet(ResultSet resultSet)
